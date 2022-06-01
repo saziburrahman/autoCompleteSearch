@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Autocomplete</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js" integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
+</head>
+<style>
+    .suggestionItem{
+        cursor: pointer;
+    }
+</style>
+<body>
+    Search:
+    <input type="text" name="" id="search">
+
+    <div id="suggetion"></div>
+
+   
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.11/jquery.autocomplete.min.js"></script> -->
+
+
+
+
+    <script>
+        var itemId = [];
+        var availableTags = [
+            {
+                value:"ActionScript",
+                id:1452
+            },
+            {
+                value:"AppleScript",
+                id:3654
+            },
+            {
+                value:"Asp",
+                id:7852
+            },
+            {
+                value:"BASIC",
+                id:6987
+            },
+            {
+                value:"C",
+                id:7524
+            },
+            {
+                value:"C++",
+                id:5634
+            },
+            {
+                value:"Clojure",
+                id:1458
+            },
+            {
+                value:"COBOL",
+                id:7845
+            },
+            {
+                value:"ColdFusion",
+                id:4568
+            }
+        ];
+
+
+    console.log(availableTags);
+      $("#search").keyup(()=>{
+        $("#suggetion").empty();
+          if($("#search").val() != "")
+          {
+            availableTags.forEach((e)=>{
+                let dataValue = e.value;
+                let inputValue = $("#search").val();
+                if (dataValue.toLocaleLowerCase().match(inputValue.toLocaleLowerCase())) {
+                    console.log(e);
+                    $("#suggetion").append(`<div class="suggestionItem" id="${ e.id }" onclick="selectedItem(this.id)">${ e.value }</div>`)
+                }
+            })
+          }
+      })
+    </script>
+
+    <script>
+        function selectedItem(params) {
+          availableTags.forEach((e)=>{
+              if(e.id == params){
+                itemId.push(e);
+              }
+          })
+          itemId.forEach((item)=>{
+              console.log(item);
+          })
+      }
+    </script>
+</body>
+</html>
